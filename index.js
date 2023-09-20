@@ -4,7 +4,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var cors = require('cors')
 
-app.use(cors())
+app.use(cors({credentials: true,origin:'*'}))
 
 app.get('/test', function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
