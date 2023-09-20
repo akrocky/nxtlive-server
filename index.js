@@ -32,6 +32,7 @@ io.on('connection', function (socket) {
      
 	  if(!(broadcaster=== undefined))
 	  {
+     
          broadcaster && socket.to(broadcaster).emit('watcher', socket.id);
 		  console.log("send watcher");
       }
@@ -61,7 +62,7 @@ io.on('connection', function (socket) {
 
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 http.listen(port, function () {
    console.log('listening on '+port);
 });
