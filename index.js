@@ -5,15 +5,11 @@ const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
-   cors: {
-     origin: '*',
-   }
- });
+const io = socketIo(server);
 
 // Enable CORS for all routes (adjust the options as needed)
 app.use(cors());
-
+io.origins('*:*')
 app.get('/test', function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
 })
