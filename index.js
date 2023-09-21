@@ -1,10 +1,14 @@
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var cors = require('cors')
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const cors = require('cors');
 
-app.use(cors({credentials: true,origin:'*'}))
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Enable CORS for all routes (adjust the options as needed)
+app.use(cors());
 
 app.get('/test', function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for all origins!'})
@@ -63,6 +67,6 @@ io.on('connection', function (socket) {
 });
 
 var port = process.env.PORT || 8000;
-http.listen(port, function () {
+server.listen(port, function () {
    console.log('listening on '+port);
 });
